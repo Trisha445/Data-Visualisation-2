@@ -17,7 +17,7 @@
     "rotate": [-132, 0],
     "center": [0, -26],
     "scale": 1000,
-    "translate": [550, 300]
+    "translate": [450, 270]
   },
   "layer": [
     {
@@ -68,8 +68,8 @@
       "mark": {
         "type": "circle",
         "stroke": "#ffffff",
-        "strokeWidth": 4,
-        "opacity": 0.9
+        "strokeWidth": 2,
+        "opacity": 0.95
       },
       "encoding": {
         "longitude": {"field": "longitude", "type": "quantitative"},
@@ -77,38 +77,26 @@
         "size": {
           "field": "Labour_Force",
           "type": "quantitative",
-          "scale": {
-            "type": "sqrt",
-            "range": [300, 1500],
-            "nice": true
-          },
+          "scale": {"type": "sqrt", "range": [200, 1500]},
           "legend": {
             "title": "Labour Force (thousands)",
             "orient": "right",
-            "format": ",.0f",
+            "offset": 160,
             "titleFontSize": 12,
-            "labelFontSize": 10,
-            "symbolStrokeWidth": 2,
-            "symbolStrokeColor": "#ffffff",
-            "offset": 100
+            "labelFontSize": 11
           }
         },
         "color": {
           "field": "Employment_Rate",
           "type": "quantitative",
-          "scale": {
-            "type": "threshold",
-            "domain": [59, 61, 63, 65, 67],
-            "scheme": "viridis"
-          },
+          "scale": {"scheme": "viridis"},
           "legend": {
             "title": "Employment Rate (%)",
-            "orient": "top-right",
-            "format": ".1f",
+            "orient": "right",
+            "offset": 20,
+            "gradientLength": 220,
             "titleFontSize": 12,
-            "labelFontSize": 10,
-            "gradientLength": 200,
-            "offset": 100
+            "labelFontSize": 11
           }
         },
         "tooltip": [
@@ -121,24 +109,19 @@
       }
     },
     {
+      "name": "state_labels",
       "data": {"url": "data/labour_force_cleaned.csv"},
       "transform": [
-        {
-          "calculate": "datum.State_Code == 'NSW' ? 147.0 : datum.State_Code == 'VIC' ? 145.0 : datum.State_Code == 'QLD' ? 145.0 : datum.State_Code == 'WA' ? 122.0 : datum.State_Code == 'SA' ? 135.0 : datum.State_Code == 'TAS' ? 147.0 : datum.State_Code == 'ACT' ? 149.1 : datum.State_Code == 'NT' ? 133.0 : 0",
-          "as": "longitude"
-        },
-        {
-          "calculate": "datum.State_Code == 'NSW' ? -32.0 : datum.State_Code == 'VIC' ? -36.5 : datum.State_Code == 'QLD' ? -22.0 : datum.State_Code == 'WA' ? -26.0 : datum.State_Code == 'SA' ? -30.0 : datum.State_Code == 'TAS' ? -42.0 : datum.State_Code == 'ACT' ? -35.3 : datum.State_Code == 'NT' ? -20.0 : 0",
-          "as": "latitude"
-        }
+        {"calculate": "datum.State_Code == 'NSW' ? 151.2 : datum.State_Code == 'VIC' ? 144.9 : datum.State_Code == 'QLD' ? 153.0 : datum.State_Code == 'WA' ? 115.9 : datum.State_Code == 'SA' ? 138.6 : datum.State_Code == 'TAS' ? 147.3 : datum.State_Code == 'ACT' ? 149.1 : 130.8", "as": "longitude"},
+        {"calculate": "datum.State_Code == 'NSW' ? -33.9 : datum.State_Code == 'VIC' ? -37.8 : datum.State_Code == 'QLD' ? -27.5 : datum.State_Code == 'WA' ? -32.0 : datum.State_Code == 'SA' ? -34.9 : datum.State_Code == 'TAS' ? -42.9 : datum.State_Code == 'ACT' ? -35.3 : -12.5", "as": "latitude"}
       ],
       "mark": {
         "type": "text",
-        "fontSize": 14,
+        "fontSize": 13,
         "fontWeight": "bold",
-        "fill": "#1e3a8a",
-        "stroke": "#ffffff",
-        "strokeWidth": 2
+        "fill": "#0b2545",
+        "stroke": null,
+        "dy": -40
       },
       "encoding": {
         "longitude": {"field": "longitude", "type": "quantitative"},
@@ -149,23 +132,15 @@
     {
       "data": {"url": "data/labour_force_cleaned.csv"},
       "transform": [
-        {
-          "calculate": "datum.State_Code == 'NSW' ? 151.2 : datum.State_Code == 'VIC' ? 144.9 : datum.State_Code == 'QLD' ? 153.0 : datum.State_Code == 'WA' ? 115.9 : datum.State_Code == 'SA' ? 138.6 : datum.State_Code == 'TAS' ? 147.3 : datum.State_Code == 'ACT' ? 149.1 : datum.State_Code == 'NT' ? 130.8 : 0",
-          "as": "longitude"
-        },
-        {
-          "calculate": "datum.State_Code == 'NSW' ? -33.9 : datum.State_Code == 'VIC' ? -37.8 : datum.State_Code == 'QLD' ? -27.5 : datum.State_Code == 'WA' ? -32.0 : datum.State_Code == 'SA' ? -34.9 : datum.State_Code == 'TAS' ? -42.9 : datum.State_Code == 'ACT' ? -35.3 : datum.State_Code == 'NT' ? -12.5 : 0",
-          "as": "latitude"
-        }
+        {"calculate": "datum.State_Code == 'NSW' ? 151.2 : datum.State_Code == 'VIC' ? 144.9 : datum.State_Code == 'QLD' ? 153.0 : datum.State_Code == 'WA' ? 115.9 : datum.State_Code == 'SA' ? 138.6 : datum.State_Code == 'TAS' ? 147.3 : datum.State_Code == 'ACT' ? 149.1 : 130.8", "as": "longitude"},
+        {"calculate": "datum.State_Code == 'NSW' ? -33.9 : datum.State_Code == 'VIC' ? -37.8 : datum.State_Code == 'QLD' ? -27.5 : datum.State_Code == 'WA' ? -32.0 : datum.State_Code == 'SA' ? -34.9 : datum.State_Code == 'TAS' ? -42.9 : datum.State_Code == 'ACT' ? -35.3 : -12.5", "as": "latitude"}
       ],
       "mark": {
         "type": "text",
-        "fontSize": 10,
-        "fontWeight": "normal",
-        "fill": "#2c3e50",
-        "dy": 35,
-        "stroke": "#ffffff",
-        "strokeWidth": 0.5
+        "fontSize": 11,
+        "fill": "#334155",
+        "stroke": null,
+        "dy": 40
       },
       "encoding": {
         "longitude": {"field": "longitude", "type": "quantitative"},

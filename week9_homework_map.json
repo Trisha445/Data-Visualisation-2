@@ -1,4 +1,4 @@
-﻿{
+{
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": {
     "text": "Australian Employment Statistics - Q3 2025",
@@ -54,7 +54,7 @@
       }
     },
     {
-      "data": {"url": "data/labour_force_cleaned.csv"},
+      "data": {"url": "labour_force_cleaned.csv"},
       "transform": [
         {
           "calculate": "datum.State_Code == 'NSW' ? 151.2 : datum.State_Code == 'VIC' ? 144.9 : datum.State_Code == 'QLD' ? 153.0 : datum.State_Code == 'WA' ? 115.9 : datum.State_Code == 'SA' ? 138.6 : datum.State_Code == 'TAS' ? 147.3 : datum.State_Code == 'ACT' ? 149.1 : datum.State_Code == 'NT' ? 130.8 : 0",
@@ -110,7 +110,7 @@
     },
     {
       "name": "state_labels",
-      "data": {"url": "data/labour_force_cleaned.csv"},
+      "data": {"url": "labour_force_cleaned.csv"},
       "transform": [
         {"calculate": "datum.State_Code == 'NSW' ? 151.2 : datum.State_Code == 'VIC' ? 144.9 : datum.State_Code == 'QLD' ? 153.0 : datum.State_Code == 'WA' ? 115.9 : datum.State_Code == 'SA' ? 138.6 : datum.State_Code == 'TAS' ? 147.3 : datum.State_Code == 'ACT' ? 149.1 : 130.8", "as": "longitude"},
         {"calculate": "datum.State_Code == 'NSW' ? -33.9 : datum.State_Code == 'VIC' ? -37.8 : datum.State_Code == 'QLD' ? -27.5 : datum.State_Code == 'WA' ? -32.0 : datum.State_Code == 'SA' ? -34.9 : datum.State_Code == 'TAS' ? -42.9 : datum.State_Code == 'ACT' ? -35.3 : -12.5", "as": "latitude"}
@@ -130,7 +130,7 @@
       }
     },
     {
-      "data": {"url": "data/labour_force_cleaned.csv"},
+      "data": {"url": "labour_force_cleaned.csv"},
       "transform": [
         {"calculate": "datum.State_Code == 'NSW' ? 151.2 : datum.State_Code == 'VIC' ? 144.9 : datum.State_Code == 'QLD' ? 153.0 : datum.State_Code == 'WA' ? 115.9 : datum.State_Code == 'SA' ? 138.6 : datum.State_Code == 'TAS' ? 147.3 : datum.State_Code == 'ACT' ? 149.1 : 130.8", "as": "longitude"},
         {"calculate": "datum.State_Code == 'NSW' ? -33.9 : datum.State_Code == 'VIC' ? -37.8 : datum.State_Code == 'QLD' ? -27.5 : datum.State_Code == 'WA' ? -32.0 : datum.State_Code == 'SA' ? -34.9 : datum.State_Code == 'TAS' ? -42.9 : datum.State_Code == 'ACT' ? -35.3 : -12.5", "as": "latitude"}

@@ -1,0 +1,199 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Australian Employment Statistics - Data Visualization</title>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Georgia:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: auto;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        h1 {
+            font-family: 'Georgia', serif;
+            color: #1a202c;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #4a5568;
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 400;
+        }
+
+        .viz-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        #vis {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .info-card h3 {
+            color: #1a202c;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .info-card p {
+            color: #4a5568;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+            color: #1a202c;
+            font-size: 0.9rem;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 50px;
+            color: #4a5568;
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Australian Employment Statistics</h1>
+        <p class="subtitle">Interactive visualization of employment rates and labour force distribution across Australian states and territories - Q3 2025</p>
+        
+        <div class="viz-container">
+            <div id="vis">
+                <div class="loading">Loading visualization...</div>
+            </div>
+        </div>
+        
+        <div class="info-grid">
+            <div class="info-card">
+                <h3>Data Overview</h3>
+                <p>This visualization presents employment statistics for all Australian states and territories, including employment rates, labour force size, and population data from the latest Australian Bureau of Statistics release for Q3 2025.</p>
+            </div>
+            
+            <div class="info-card">
+                <h3>Visual Encoding</h3>
+                <p>Circle size represents labour force size, while color intensity indicates employment rates. Hover over each circle to see detailed statistics for each jurisdiction.</p>
+            </div>
+            
+            <div class="info-card">
+                <h3>Key Insights</h3>
+                <p>The map reveals significant variations in employment patterns across Australia, with larger states showing different employment dynamics compared to smaller territories and remote regions.</p>
+            </div>
+            
+            <div class="info-card">
+                <h3>Technical Details</h3>
+                <p>Built with Vega-Lite using a Conic Equal Area projection optimized for Australia. Interactive tooltips provide comprehensive employment metrics for each region.</p>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Data Visualization | Australian Employment Analysis | Q3 2025</p>
+        </div>
+    </div>
+
+    <script>
+        // Load and display the Vega-Lite visualization
+        vegaEmbed('#vis', 'js/week9_homework_map.json', {
+            theme: 'googlecharts',
+            renderer: 'svg',
+            actions: {
+                export: true,
+                source: false,
+                compiled: false,
+                editor: false
+            }
+        }).then(function(result) {
+            console.log('Visualization loaded successfully!');
+        }).catch(function(error) {
+            console.error('Error loading visualization:', error);
+            document.getElementById('vis').innerHTML = 
+                '<div style="color: #e53e3e; padding: 20px; text-align: center;">' +
+                'Error loading visualization. Please check that the data file exists and the server is running.' +
+                '</div>';
+        });
+    </script>
+</body>
+</html>
